@@ -1,0 +1,80 @@
+#!/bin/bash
+#===============================================================================
+# step:
+echo "1 to run spin"
+echo "11 to submit to Biowulf"
+echo "31 to run correlation.py"
+
+echo -n "type step: "
+read step_number
+
+#===============================================================================
+if [ $step_number -le 1 ] || [ $step_number -eq 11 ]
+then
+rm *.dat
+#rm -r W
+#rm -r cost
+
+#mkdir W
+#mkdir cost
+
+#rm fortran_lib.so
+#f2py -c -m fortran_lib 10fortran_lib.f90
+
+rm swarmfile.txt
+file="swarmfile.txt"
+
+fi
+
+#-----------------------------------
+if [ $step_number -eq 31 ]
+then
+rm -r C
+mkdir C
+fi
+
+#===============================================================================
+# parameters: 
+l=501
+l=${l%.*}
+
+#for t2 in {754..3394}
+for t2 in {1754..3394}
+
+do
+t2=${t2%.*}
+echo "t2: $t2" 
+
+#------------------------------
+#run program:
+if [ $step_number -eq 1 ]
+then
+echo "running MAIN"
+python 1main.py $l $t2 &
+fi
+
+#run program all spin in Biowulf:
+if [ $step_number -eq 11 ]
+then
+#for (( i=1; i <= $na; i++ ))
+#do
+echo "running MAIN"
+echo "python 1main.py $l $t2"  >> $file
+#done
+fi
+
+#run program:
+if [ $step_number -eq 31 ]
+then
+echo "running correlation"
+python 3correlation.py $l $t2 &
+fi
+
+done
+
+#===============================================================================
+# submit to Biowulf:
+if [ $step_number -eq 11 ]
+then
+swarm -f swarmfile.txt -t 1 -g 4.0 --time=0-10:00:00 --partition norm
+fi

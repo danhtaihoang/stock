@@ -1,0 +1,304 @@
+#!/bin/sh
+
+echo "1 for CONNECTING to Cluster"
+echo "2 for SENDING to Cluster"
+echo "3 for copy FROM Cluster"
+
+echo "biowulf--10x, gpu4(144)--0x, half2(96)--1x, half(64)--2x, amd(64)--4x, gpu(24)--5x,"
+echo "quad1(88)--6x, quad2(88)--7x, quad3(88)--81, quad4(88)--91, mmu1--94,95,96"
+echo "niddk19:121,122,123"
+
+echo -n "Step: "
+read step_number
+
+#10X-BIOWULF:====================================================================================
+if [ $step_number -eq 101 ]
+then
+echo "Connecting to BIOWULF:"
+ssh -X hoangd2@biowulf.nih.gov
+fi
+
+if [ $step_number -eq 102 ]
+then
+echo -n "Name_folder_TO_BioWulf_server: "
+read name_folder
+#scp -r $name_folder hoangd2@biowulf.nih.gov:~/.  !!! To home directory
+scp -r $name_folder hoangd2@biowulf.nih.gov:/data/hoangd2
+fi
+
+if [ $step_number -eq 103 ]
+then
+echo -n "Name_folder_FROM_BioWulf_server: "
+read name_folder
+#scp -r hoangd2@biowulf.nih.gov:~/$name_folder /home/tai/    !!! from home directory
+scp -r hoangd2@biowulf.nih.gov:/data/hoangd2/$name_folder /home/tai/
+fi
+
+if [ $step_number -eq 104 ]
+then
+echo -n "Name_folder_TO_HOME_BioWulf_server: "
+read name_folder
+scp -r $name_folder hoangd2@biowulf.nih.gov:~/.  #!!! To home directory
+#scp -r $name_folder hoangd2@biowulf.nih.gov:/data/hoangd2
+fi
+
+if [ $step_number -eq 105 ]
+then
+echo -n "Name_folder_FROM_HOME_BioWulf_server: "
+read name_folder
+scp -r hoangd2@biowulf.nih.gov:~/$name_folder /home/tai/    #!!! from home directory
+#scp -r hoangd2@biowulf.nih.gov:/data/hoangd2/$name_folder /home/tai/
+fi
+
+#01-GPU4:======================================================================================
+if [ $step_number -eq 01 ]
+then
+echo "Connecting to GPU4: "
+ssh -X hoangd2@gpu4.niddk.nih.gov
+fi
+
+if [ $step_number -eq 02 ]
+then
+echo -n "Name_folder_TO_GPU4: "
+read name_folder
+scp -r $name_folder hoangd2@gpu4.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 03 ]
+then
+echo -n "Name_folder_FROM_GPU4: "
+read name_folder
+scp -r hoangd2@gpu4.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#11-HALF2:======================================================================================
+if [ $step_number -eq 11 ]
+then
+echo "Connecting to HALF2: "
+ssh -X hoangd2@half2.niddk.nih.gov
+fi
+
+if [ $step_number -eq 12 ]
+then
+echo -n "Name_folder_TO_HALF2: "
+read name_folder
+scp -r $name_folder hoangd2@half2.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 13 ]
+then
+echo -n "Name_folder_FROM_HALF2: "
+read name_folder
+scp -r hoangd2@half2.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#21-HALF:======================================================================================
+if [ $step_number -eq 21 ]
+then
+echo "Connecting to HALF: "
+ssh -X hoangd2@half.niddk.nih.gov
+fi
+
+if [ $step_number -eq 22 ]
+then
+echo -n "Name_folder_TO_HALF: "
+read name_folder
+scp -r $name_folder hoangd2@half.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 23 ]
+then
+echo -n "Name_folder_FROM_HALF: "
+read name_folder
+scp -r hoangd2@half.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#31-GPU2:======================================================================================
+if [ $step_number -eq 31 ]
+then
+echo "Connecting to GPU2: "
+ssh -X hoangd2@gpu2.niddk.nih.gov
+fi
+
+if [ $step_number -eq 32 ]
+then
+echo -n "Name_folder_TO_GPU2: "
+read name_folder
+scp -r $name_folder hoangd2@gpu2.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 33 ]
+then
+echo -n "Name_folder_FROM_GPU2: "
+read name_folder
+scp -r hoangd2@gpu2.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#41-AMD64:======================================================================================
+if [ $step_number -eq 41 ]
+then
+echo "Connecting to AMD64: "
+ssh -X hoangd2@amd64.niddk.nih.gov
+fi
+
+if [ $step_number -eq 42 ]
+then
+echo -n "Name_folder_TO_AMD64: "
+read name_folder
+scp -r $name_folder hoangd2@amd64.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 43 ]
+then
+echo -n "Name_folder_FROM_AMD64: "
+read name_folder
+scp -r hoangd2@amd64.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#51-GPU:======================================================================================
+if [ $step_number -eq 51 ]
+then
+echo "Connecting to GPU: "
+ssh -X hoangd2@gpu.niddk.nih.gov
+fi
+
+if [ $step_number -eq 52 ]
+then
+echo -n "Name_folder_TO_GPU: "
+read name_folder
+scp -r $name_folder hoangd2@gpu.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 53 ]
+then
+echo -n "Name_folder_FROM_GPU: "
+read name_folder
+scp -r hoangd2@gpu.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+
+#61-quad1:======================================================================================
+if [ $step_number -eq 61 ]
+then
+echo "Connecting to quad: "
+ssh -X hoangd2@quad1.niddk.nih.gov
+fi
+
+if [ $step_number -eq 62 ]
+then
+echo -n "Name_folder_TO_quad: "
+read name_folder
+scp -r $name_folder hoangd2@quad1.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 63 ]
+then
+echo -n "Name_folder_FROM_quad: "
+read name_folder
+scp -r hoangd2@quad1.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#71-quad2:======================================================================================
+if [ $step_number -eq 71 ]
+then
+echo "Connecting to quad2: "
+ssh -X hoangd2@quad2.niddk.nih.gov
+fi
+
+if [ $step_number -eq 72 ]
+then
+echo -n "Name_folder_TO_quad: "
+read name_folder
+scp -r $name_folder hoangd2@quad2.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 73 ]
+then
+echo -n "Name_folder_FROM_quad: "
+read name_folder
+scp -r hoangd2@quad2.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#81-quad3:======================================================================================
+if [ $step_number -eq 81 ]
+then
+echo "Connecting to quad3: "
+ssh -X hoangd2@quad3.niddk.nih.gov
+fi
+
+if [ $step_number -eq 82 ]
+then
+echo -n "Name_folder_TO_quad3: "
+read name_folder
+scp -r $name_folder hoangd2@quad3.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 83 ]
+then
+echo -n "Name_folder_FROM_quad3: "
+read name_folder
+scp -r hoangd2@quad3.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#91-quad4:======================================================================================
+if [ $step_number -eq 91 ]
+then
+echo "Connecting to quad4: "
+ssh -X hoangd2@quad4.niddk.nih.gov
+fi
+
+if [ $step_number -eq 92 ]
+then
+echo -n "Name_folder_TO_quad4: "
+read name_folder
+scp -r $name_folder hoangd2@quad4.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 93 ]
+then
+echo -n "Name_folder_FROM_quad4: "
+read name_folder
+scp -r hoangd2@quad4.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#91-quad4:======================================================================================
+if [ $step_number -eq 94 ]
+then
+echo "Connecting to mmu1: "
+ssh -X hoangd2@mmu1.niddk.nih.gov
+fi
+
+if [ $step_number -eq 95 ]
+then
+echo -n "Name_folder_TO_mmu1: "
+read name_folder
+scp -r $name_folder hoangd2@mmu1.niddk.nih.gov:~/.
+fi
+
+if [ $step_number -eq 96 ]
+then
+echo -n "Name_folder_FROM_mmu1: "
+read name_folder
+scp -r hoangd2@mmu1.niddk.nih.gov:~/$name_folder /home/tai/
+fi
+
+#-NIDDK2018 (at home):======================================================================================
+if [ $step_number -eq 111 ]
+then
+echo "Connecting to NIDDK2018: "
+ssh -X tai@192.168.0.67
+fi
+
+if [ $step_number -eq 112 ]
+then
+echo -n "Name_folder_TO_NIDDK2018: "
+read name_folder
+scp -r $name_folder tai@192.168.0.67:~/.
+fi
+
+if [ $step_number -eq 113 ]
+then
+echo -n "Name_folder_FROM_NIDDK2018: "
+read name_folder
+scp -r tai@192.168.0.67:~/$name_folder /home/tai/
+fi
